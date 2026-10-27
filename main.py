@@ -288,10 +288,10 @@ class VentanaPrincipal(QMainWindow):
 
         parametros = [
             ("Isc (A):", "Shortcircuit current (A)"),
-            ("Voc (V):", "Open-circuit Voltaje (V)"),
-            ("Vmp (V):", "Voltaje at the Maximum power (V)"),
+            ("Voc (V):", "Open-circuit Voltage (V)"),
+            ("Vmp (V):", "Voltage at the Maximum power (V)"),
             ("Imp (A):", "Current at the maximum power (A)"),
-            ("Kv (V/°C):", "Voltaje coefficient"),
+            ("Kv (V/°C):", "Voltage coefficient"),
             ("Ki (A/°C):", "Current coefficient"),
             ("T (°C):", "Temperature"),
             ("Number of cells :", "Number of cells of the panel"),
@@ -458,7 +458,7 @@ class VentanaPrincipal(QMainWindow):
         self.graficar_curvas(
         datos_grafica["V_2"],
         datos_grafica["I_final"],
-        resultados["Voltaje (Vmpp)"],
+        resultados["Voltage (Vmpp)"],
         resultados["Current (Impp)"],
         datos_grafica["Vmp"],
         datos_grafica["Imp"],
@@ -1084,9 +1084,9 @@ class VentanaPrincipal(QMainWindow):
         ax[0].plot(V_2, I_final, 'b-')
         ax[0].plot(Vmax_2, Imax_2, 'b+', markersize=10)
 
-        ax[0].set_xlabel('Voltaje (V)')
-        ax[0].set_ylabel('Corriente (A)')
-        ax[0].set_title('Curva I–V')
+        ax[0].set_xlabel('Voltage (V)')
+        ax[0].set_ylabel('Current (A)')
+        ax[0].set_title('I–V curve')
         ax[0].grid(True)
         ax[0].legend()
 
