@@ -60,7 +60,7 @@ def estimar_parametros_pv(
                 f_val = f(I)
                 f_der = f_derivada(I)
                 if abs(f_der) < 1e-12:
-                    raise ValueError(f"Derivada demasiado pequeña en V = {Vi}")
+                    raise ValueError(f"Derivative too small at V = {Vi}")
                 I_new = I - f_val / f_der
                 if abs(I_new - I) < tol:
                     break
@@ -97,14 +97,14 @@ def estimar_parametros_pv(
     idx_max = np.argmax(P_final)
 
     resultados = {
-        "Corriente de saturación diodo 1 (Io1)": Io,
-        "Corriente de saturación diodo 2 (Io2)": Io,
-        "Fotocorriente (Iph)": Iph,
-        "Resistencia serie (Rs)": Rs_final,
-        "Resistencia paralelo (Rp)": Rp_final,
-        "Potencia (Pmpp)": P_final[idx_max],
-        "Voltaje (Vmpp)": V_2[idx_max],
-        "Corriente (Impp)": I_final[idx_max],
+        "Saturation current of diodo 1 (Io1)": Io,
+        "Saturation current of diodo 2 (Io2)": Io,
+        "Photocurrent (Iph)": Iph,
+        "Series resistance (Rs)": Rs_final,
+        "Shunt resistance (Rp)": Rp_final,
+        "Powe (Pmpp)": P_final[idx_max],
+        "Voltage (Vmpp)": V_2[idx_max],
+        "Current (Impp)": I_final[idx_max],
     }
 
     datos_grafica = {
