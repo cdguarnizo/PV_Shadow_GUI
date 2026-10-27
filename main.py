@@ -27,7 +27,8 @@ class VentanaPrincipal(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Interfaz PV - Simulador de Sombreado")
+        #self.setWindowTitle("Interfaz PV - Simulador de Sombreado")
+        self.setWindowTitle("PV GUI - Shading Simulator")
 
         # ── Adaptar tamaño a la pantalla disponible ──────────────────────
         pantalla = QApplication.primaryScreen().availableGeometry()
@@ -56,10 +57,10 @@ class VentanaPrincipal(QMainWindow):
                 "Kv (V/°C):": -0.08,
                 "Ki (A/°C):": 0.003,
                 "T (°C):": 25,
-                "Número de celdas :": 36,
-                "Número de diodos bypass :": 2,
-                "filas": 9,
-                "columnas": 4, 
+                "Number of cells :": 36,
+                "Number of bypass diodes :": 2,
+                "rows": 9,
+                "columns": 4, 
             },
             "Panel Mono-Crystalline SM55": {
                 "Isc (A):": 3.45,
@@ -69,10 +70,10 @@ class VentanaPrincipal(QMainWindow):
                 "Kv (V/°C):": -0.075,
                 "Ki (A/°C):": 0.0012,
                 "T (°C):": 25,
-                "Número de celdas :": 36,
-                "Número de diodos bypass :": 3,
-                "filas": 12,
-                "columnas": 3, 
+                "Number of cells :": 36,
+                "Number of bypass diodes :": 3,
+                "rows": 12,
+                "columns": 3, 
             },
             "Panel Thin Film ST40": {
                 "Isc (A):": 2.68,
@@ -82,10 +83,10 @@ class VentanaPrincipal(QMainWindow):
                 "Kv (V/°C):": -0.100,
                 "Ki (A/°C):":  0.00035,
                 "T (°C):": 25,
-                "Número de celdas :": 36,
-                "Número de diodos bypass :": 1,
-                "filas": 9,
-                "columnas": 4, 
+                "Number of cells :": 36,
+                "NNumber of bypass diodes :": 1,
+                "rows": 9,
+                "columns": 4, 
             },
             "Panel KGC200GT": {
                 "Isc (A):": 8.21,
@@ -95,10 +96,10 @@ class VentanaPrincipal(QMainWindow):
                 "Kv (V/°C):": -0.124,
                 "Ki (A/°C):": 0.00318,
                 "T (°C):": 25,
-                "Número de celdas :": 54,
-                "Número de diodos bypass :": 1,
-                "filas": 9,
-                "columnas": 6, 
+                "Number of cells :": 54,
+                "Number of bypass diodes :": 1,
+                "rows": 9,
+                "columns": 6, 
             },
             "Panel STP280": {
                 "Isc (A):": 8.33,
@@ -108,10 +109,10 @@ class VentanaPrincipal(QMainWindow):
                 "Kv (V/°C):": -0.118,
                 "Ki (A/°C):": 0.0047,
                 "T (°C):": 25,
-                "Número de celdas :": 72,
-                "Número de diodos bypass :": 1,
-                "filas": 6,
-                "columnas": 12, 
+                "Number of cells :": 72,
+                "Number of bypass diodes :": 1,
+                "rows": 6,
+                "columns": 12, 
             },
             "Panel SPR-315": {
                 "Isc (A):": 6.14,
@@ -121,10 +122,10 @@ class VentanaPrincipal(QMainWindow):
                 "Kv (V/°C):": -0.123,
                 "Ki (A/°C):": 0.00483,
                 "T (°C):": 25,
-                "Número de celdas :": 96,
-                "Número de diodos bypass :": 3,
-                "filas": 8,
-                "columnas": 12, 
+                "Number of cells :": 96,
+                "Number of bypass diodes :": 3,
+                "rows": 8,
+                "columns": 12, 
             }
             ,
              "Panel I-110/24": {
@@ -135,10 +136,10 @@ class VentanaPrincipal(QMainWindow):
                 "Kv (V/°C):": -0.078,
                 "Ki (A/°C):": 0.00429,
                 "T (°C):": 25,
-                "Número de celdas :": 72,
-                "Número de diodos bypass :": 1,
-                "filas": 12,
-                "columnas": 6, 
+                "Number of cells :": 72,
+                "Number of bypass diodes :": 1,
+                "rows": 12,
+                "columns": 6, 
             }
         }
 
@@ -224,22 +225,22 @@ class VentanaPrincipal(QMainWindow):
 
         # ================= MENÚ SUPERIOR =================
         menubar = self.menuBar()
-        menu_archivo = menubar.addMenu("Menú")
+        menu_archivo = menubar.addMenu("Menu")
 
-        menu_archivo.addAction("Descargar parámetros panel (Excel)").triggered.connect(lambda: ma.descargar_parametros_panel(self))
-        menu_archivo.addAction("Descargar parámetros estimados (Excel)").triggered.connect(lambda: ma.descargar_parametros_xlsx(self))
-        menu_archivo.addAction("Guardar sombreado (Excel)").triggered.connect(lambda: ma.guardar_sombreado_excel(self))
-        menu_archivo.addAction("Descargar curvas sombreado (PNG)").triggered.connect(lambda: ma.descargar_sombreado_png(self))
+        menu_archivo.addAction("Download module parameters (Excel)").triggered.connect(lambda: ma.descargar_parametros_panel(self))
+        menu_archivo.addAction("Download module estimated parameters (Excel)").triggered.connect(lambda: ma.descargar_parametros_xlsx(self))
+        menu_archivo.addAction("Save shading (Excel)").triggered.connect(lambda: ma.guardar_sombreado_excel(self))
+        menu_archivo.addAction("Download shading curves (PNG)").triggered.connect(lambda: ma.descargar_sombreado_png(self))
 
         menu_archivo.addSeparator()
-        menu_archivo.addAction("Descargar todo").triggered.connect(lambda: ma.descargar_todo(self))
+        menu_archivo.addAction("Download all").triggered.connect(lambda: ma.descargar_todo(self))
         menu_archivo.addSeparator()
-        menu_archivo.addAction("Acerca de").triggered.connect(lambda: ma.mostrar_acerca_de(self))
+        menu_archivo.addAction("About").triggered.connect(lambda: ma.mostrar_acerca_de(self))
 
         # ================= PESTAÑAS =================
         self.tabs = QTabWidget()
-        self.tabs.addTab(self.tab_configuracion(), "Configuración")
-        self.tabs.addTab(self.tab_sombreado(), "Sombreado")
+        self.tabs.addTab(self.tab_configuracion(), "Configuration")
+        self.tabs.addTab(self.tab_sombreado(), "Shading")
 
         self.tabs.currentChanged.connect(self.validar_cambio_pestana)
 
@@ -258,12 +259,12 @@ class VentanaPrincipal(QMainWindow):
 
         self.combo_modo = QComboBox()
         self.combo_modo.addItems([
-            "Ingreso manual",
-            "Seleccionar panel"
+            "Manual Input",
+            "Select Module"
         ])
         self.combo_modo.currentTextChanged.connect(self.cambiar_modo)
 
-        label_modo = QLabel("Modo de ingreso:")
+        label_modo = QLabel("Input mode:")
         label_modo.setStyleSheet("font-weight: bold;")
         modo_layout.addWidget(label_modo)
         modo_layout.addWidget(self.combo_modo)
@@ -279,22 +280,22 @@ class VentanaPrincipal(QMainWindow):
 
         layout_izq.addWidget(self.combo_paneles)
 
-        titulo = QLabel("Parámetros del módulo fotovoltaico")
+        titulo = QLabel(Photovoltaic module parameters")
         titulo.setStyleSheet("font-weight: bold; font-size: 16px;")
         layout_izq.addWidget(titulo)
 
         self.inputs = {}
 
         parametros = [
-            ("Isc (A):", "Corriente de cortocircuito (A)"),
-            ("Voc (V):", "Voltaje en circuito abierto (V)"),
-            ("Vmp (V):", "Voltaje en máxima potencia (V)"),
-            ("Imp (A):", "Corriente en máxima potencia (A)"),
-            ("Kv (V/°C):", "Coeficiente de voltaje"),
-            ("Ki (A/°C):", "Coeficiente de corriente"),
-            ("T (°C):", "Temperatura"),
-            ("Número de celdas :", "Número de celdas del panel"),
-            ("Número de diodos bypass :", "Diodos bypass")
+            ("Isc (A):", "Shortcircuit current (A)"),
+            ("Voc (V):", "Open-circuit Voltaje (V)"),
+            ("Vmp (V):", "Voltaje at the Maximum power (V)"),
+            ("Imp (A):", "Current at the maximum power (A)"),
+            ("Kv (V/°C):", "Voltaje coefficient"),
+            ("Ki (A/°C):", "Current coefficient"),
+            ("T (°C):", "Temperature"),
+            ("Number of cells :", "Number of cells of the panel"),
+            ("Number of bypass diodes :", "Bypass diodes")
         ]
 
         for nombre, ayuda in parametros:
@@ -312,7 +313,7 @@ class VentanaPrincipal(QMainWindow):
 
         # a1
         fila = QHBoxLayout()
-        label_a1 = QLabel("Factor de idealidad diodo 1 (a1):")
+        label_a1 = QLabel("Ideality factor diode 1 (a1):")
         valor_a1 = QLabel("1.0")
 
         valor_a1.setFixedWidth(120)   # para que quede alineado con los inputs
@@ -324,7 +325,7 @@ class VentanaPrincipal(QMainWindow):
 
         # a2
         fila = QHBoxLayout()
-        label_a2 = QLabel("Factor de idealidad diodo 2 (a2):")
+        label_a2 = QLabel("Ideality factor diode 2 (a2):")
         valor_a2 = QLabel("2.0")
 
         valor_a2.setFixedWidth(120)
@@ -335,7 +336,7 @@ class VentanaPrincipal(QMainWindow):
         layout_izq.addLayout(fila)
 
         # ---------- BOTÓN ----------
-        boton = QPushButton("Estimar parámetros")
+        boton = QPushButton("Estimate parameters")
         boton.clicked.connect(self.estimar_parametros)
         boton.setStyleSheet("""
             QPushButton {
@@ -356,7 +357,7 @@ class VentanaPrincipal(QMainWindow):
         layout_izq.addWidget(boton)
         #layout_izq.addSpacing(10)
 
-        titulo_imagen = QLabel("Modelo circuital de dos diodos")
+        titulo_imagen = QLabel("Two-diodes Circuital Model")
         titulo_imagen.setAlignment(Qt.AlignCenter)
         titulo_imagen.setStyleSheet("font-weight: bold; font-size: 14px;")
         layout_izq.addWidget(titulo_imagen)
@@ -389,7 +390,7 @@ class VentanaPrincipal(QMainWindow):
         return widget
     
     def cambiar_modo(self, modo):
-        es_manual = modo == "Ingreso manual"
+        es_manual = modo == "Manual Input"
 
         self.combo_paneles.setVisible(not es_manual)
 
@@ -418,14 +419,14 @@ class VentanaPrincipal(QMainWindow):
             if campo.text().strip() == "":
                 QMessageBox.warning(
                     self,
-                    "Campos incompletos",
-                    f"Por favor ingrese el valor de:\n{nombre}"
+                    "Incomplete fields",
+                    f"Please enter the value of:\n{nombre}"
                 )
                 return
         
         try:
-            self.Ns = int(self.inputs["Número de celdas :"].text())
-            self.Nd = int(self.inputs["Número de diodos bypass :"].text())
+            self.Ns = int(self.inputs["Number of cells :"].text())
+            self.Nd = int(self.inputs["Numbe rof bypass diodes :"].text())
 
             if self.Ns <= 0 or self.Nd <= 0:
                 raise ValueError
@@ -434,7 +435,7 @@ class VentanaPrincipal(QMainWindow):
             QMessageBox.warning(
                 self,
                 "Error",
-                "Ingrese valores válidos para número de celdas y diodos."
+                "Please enter valid values for the number of cells and diodes."
             )
             return   
             
@@ -458,7 +459,7 @@ class VentanaPrincipal(QMainWindow):
         datos_grafica["V_2"],
         datos_grafica["I_final"],
         resultados["Voltaje (Vmpp)"],
-        resultados["Corriente (Impp)"],
+        resultados["Current (Impp)"],
         datos_grafica["Vmp"],
         datos_grafica["Imp"],
 
@@ -491,10 +492,10 @@ class VentanaPrincipal(QMainWindow):
 
         self.inputs_resultados = {}
 
-        parametros_circuitales = {"Corriente de saturación diodo 1 (Io1)", "Corriente de saturación diodo 2 (Io2)", "Fotocorriente (Iph)", "Resistencia serie (Rs)", "Resistencia paralelo (Rp)"}
+        parametros_circuitales = {"Saturation current diode 1 (Io1)", "Saturation current diode 2 (Io2)", "Photocurrent (Iph)", "Series resistance (Rs)", "Shunt resistance (Rp)"}
         
 
-        titulo1 = QLabel("PARÁMETROS CIRCUITALES")
+        titulo1 = QLabel("CIRCUITAL PARAMETERS")
         titulo1.setStyleSheet("font-weight: bold; font-size: 14px;")
         self.resultado_layout.addWidget(titulo1)
 
@@ -513,14 +514,14 @@ class VentanaPrincipal(QMainWindow):
                 # ===== CAMPOS MANUALES EXTRA =====
 
         campos_manuales = {
-            "Coeficiente de ruptura inversa (aRBD)": "aRBD",
-            "Tensión de ruptura inversa (VRBD)": "VRBD",
-            "Exponente de ruptura inversa (nRBD)": "nRBD"
+            "Reverse breakdown coefficient (aRBD)": "aRBD",
+            "Reverse breakdown voltage (VRBD)": "VRBD",
+            "Reverse breakdown exponent (nRBD)": "nRBD"
         }
 
         self.inputs_manuales = {}
 
-        self.checkbox_editar_rbd = QCheckBox("Modificar parámetros de ruptura inversa")
+        self.checkbox_editar_rbd = QCheckBox("Modify Reverse breakdown parameters")
         self.checkbox_editar_rbd.toggled.connect(self.toggle_parametros_rbd)
 
         # centrar checkbox
@@ -566,7 +567,7 @@ class VentanaPrincipal(QMainWindow):
         grid.setContentsMargins(8, 8, 8, 8)
 
         # Encabezados
-        encabezados = ["Parámetro", "Rango recomendado"]
+        encabezados = ["Parameter", "Recommended range"]
         for col, texto in enumerate(encabezados):
             lbl = QLabel(texto)
             lbl.setFont(QFont("Arial", 6, QFont.Bold))
@@ -617,7 +618,7 @@ class VentanaPrincipal(QMainWindow):
         self.tabla_rangos_widget = contenedor_tabla
         contenedor_tabla.hide()
 
-        titulo2 = QLabel("VARIABLES DE MAXIMA POTENCIA")
+        titulo2 = QLabel("MAXIMUM POWER VARIABLES")
         titulo2.setStyleSheet("font-weight: bold; font-size: 14px; margin-top: 10px;")
         self.resultado_layout.addWidget(titulo2)
 
@@ -634,7 +635,7 @@ class VentanaPrincipal(QMainWindow):
                 self.resultado_layout.addLayout(fila)
                 self.inputs_resultados[k] = edit
 
-        btn_guardar = QPushButton("Guardar cambios")
+        btn_guardar = QPushButton("Save changes")
         btn_guardar.clicked.connect(self.guardar_resultados_editados)
         btn_guardar.setStyleSheet("""
             QPushButton {
@@ -693,10 +694,10 @@ class VentanaPrincipal(QMainWindow):
             self.nRBD = self.valores_default_rbd["nRBD"]
 
         mapeo_parametros = {
-            "Corriente de saturación diodo 1 (Io1)": "Isat1_T0",
-            "Corriente de saturación diodo 2 (Io2)": "Isat2_T0",
-            "Resistencia serie (Rs)": "Rs",
-            "Resistencia paralelo (Rp)": "Rp"
+            "Saturation current of diode 1 (Io1)": "Isat1_T0",
+            "Saturation current of diode 2 (Io2)": "Isat2_T0",
+            "Series resistance (Rs)": "Rs",
+            "Shunt resistance (Rp)": "Rp"
         }
         
         for k, v in self.resultados.items():
@@ -718,14 +719,14 @@ class VentanaPrincipal(QMainWindow):
             QMessageBox.warning(
                 self,
                 "Error",
-                f"Las columnas ({columnas}) no son divisibles entre los diodos ({diodos})."
+                f"The number of columns ({columnas}) are not divisible by the number of diodes ({diodos})."
             )
             return
 
         segmento = columnas // diodos
         patron = [segmento] * diodos
 
-        # print("Patrón generado:", patron)
+        # print(Generated pattern:", patron)
 
         # print(f"filas: {filas}, columnas: {columnas}")
         # print(f"Rs: {self.Rs}, Rsh: {self.Rp}, Rp: {self.Rp} , Isat2_T0: {self.Isat2_T0}, ki: {ki}")
@@ -782,8 +783,8 @@ class VentanaPrincipal(QMainWindow):
 
         QMessageBox.information(
             self,
-            "Éxito",
-            "Resultados actualizados correctamente"
+            "Success",
+            "Results updated correctly"
         )  
 
     def tab_sombreado(self):
@@ -792,7 +793,7 @@ class VentanaPrincipal(QMainWindow):
 
         # --- PANEL IZQUIERDO: Entradas y Cuadrícula ---
         panel_izq = QGroupBox()
-        titulo_sombreado = QLabel("Configuración de Sombreado")
+        titulo_sombreado = QLabel("Shading configuration")
         titulo_sombreado.setAlignment(Qt.AlignCenter)
         titulo_sombreado.setStyleSheet("""
             font-size: 20px;
@@ -807,7 +808,7 @@ class VentanaPrincipal(QMainWindow):
         grupo_temperatura = QGroupBox()
         layout_temperatura = QVBoxLayout(grupo_temperatura)
 
-        self.label_temperatura = QLabel(f"Temperatura: {self.temp_default_c} °C")
+        self.label_temperatura = QLabel(f"Temperature: {self.temp_default_c} °C")
         self.label_temperatura.setAlignment(Qt.AlignCenter)
         self.label_temperatura.setStyleSheet("font-weight: bold;")
 
@@ -854,7 +855,7 @@ class VentanaPrincipal(QMainWindow):
 
         # --- PANEL DERECHO: Gráficas ---
         panel_der = QGroupBox()
-        titulo_sombreado = QLabel("Visualización de Curvas")
+        titulo_sombreado = QLabel("Curves visualization")
         titulo_sombreado.setAlignment(Qt.AlignCenter)
         titulo_sombreado.setStyleSheet("""
             font-size: 20px;
@@ -878,7 +879,7 @@ class VentanaPrincipal(QMainWindow):
                 QMessageBox.warning(
                     self,
                     "Error",
-                    "Primero debe configurar el panel en la pestaña Configuración."
+                    "First, you must configure the panel on the Settings tab."
                 )
                 return
             
@@ -955,7 +956,7 @@ class VentanaPrincipal(QMainWindow):
 
     def cambiar_temperatura(self, valor):
         self.Tcell_K = valor + 273.15
-        self.label_temperatura.setText(f"Temperatura: {valor} °C")
+        self.label_temperatura.setText(f"Temperature: {valor} °C")
 
         if self.modelo_guardado:
             self.actualizar_modelo_pvmismatch()
@@ -993,7 +994,7 @@ class VentanaPrincipal(QMainWindow):
                             irradiancias.append(val)
                             #print(f"Celda sombreada = fila:{r}, col:{c}, indice:{idx}, valor:{val:.3f}")
     
-                #print(f"irradiancias: {tuple(irradiancias)}, indices: {tuple(indices)}")
+                #print(f"irradiances: {tuple(irradiancias)}, indexes: {tuple(indices)}")
                 if len(indices) > 0:
                     self.pvsys.setSuns({
                         0: {0: [tuple(irradiancias), tuple(indices)]}
@@ -1008,7 +1009,7 @@ class VentanaPrincipal(QMainWindow):
             self.pvsys.update()
             # ───────────────────────────────────────────────────────────
     
-            #print("Atributos pvsys:", [a for a in dir(self.pvsys) if not a.startswith('_')])
+            #print("PVSys attributes:", [a for a in dir(self.pvsys) if not a.startswith('_')])
             #Obtener curvas
             P = self.pvsys.Psys
             #print(f"P: {P}")
@@ -1041,9 +1042,9 @@ class VentanaPrincipal(QMainWindow):
                 self.actualizar_graficas(V, I, P, Vmpp, Impp, Pmpp)
     
         except IndexError as e:
-            print(f"pvmismatch no pudo calcular MPP: {e} — irradiancia muy baja")
+            print(f"pvmismatch was unable to calculate MPP: {e} — very low irradiance")
         except Exception as e:
-            print(f"Error en actualizar_modelo_pvmismatch: {e}")
+            print(f"Error in `actualizar_modelo_pvmismatch`: {e}")
 
     def actualizar_graficas(self, V, I, P, Vmpp, Impp, Pmpp):
 
@@ -1055,9 +1056,9 @@ class VentanaPrincipal(QMainWindow):
         ax[0].plot(V, I, 'b-')
         ax[0].plot(Vmpp, Impp, 'r+', markersize=12, markeredgewidth=2,
                    label=f'MPP ({Vmpp:.2f} V, {Impp:.2f} A)')
-        ax[0].set_xlabel('Voltaje (V)')
-        ax[0].set_ylabel('Corriente (A)')
-        ax[0].set_title('Curva I–V')
+        ax[0].set_xlabel('Voltage (V)')
+        ax[0].set_ylabel('Current (A)')
+        ax[0].set_title('I–V curve')
         ax[0].grid(True)
         ax[0].legend(fontsize=8)
 
@@ -1065,9 +1066,9 @@ class VentanaPrincipal(QMainWindow):
         ax[1].plot(V, P, 'r-')
         ax[1].plot(Vmpp, Pmpp, 'b+', markersize=12, markeredgewidth=2,
                    label=f'MPP ({Vmpp:.2f} V, {Pmpp:.2f} W)')
-        ax[1].set_xlabel('Voltaje (V)')
-        ax[1].set_ylabel('Potencia (W)')
-        ax[1].set_title('Curva P–V')
+        ax[1].set_xlabel('Voltage (V)')
+        ax[1].set_ylabel('Power (W)')
+        ax[1].set_title('P–V curve')
         ax[1].grid(True)
         ax[1].legend(fontsize=8)
 
@@ -1095,9 +1096,9 @@ class VentanaPrincipal(QMainWindow):
         ax[1].plot(V_2, P_final, 'r-')
         ax[1].plot(Vmax_2, P_final.max(), 'r+')
 
-        ax[1].set_xlabel('Voltaje (V)')
-        ax[1].set_ylabel('Potencia (W)')
-        ax[1].set_title('Curva P–V')
+        ax[1].set_xlabel('Voltage (V)')
+        ax[1].set_ylabel('Power (W)')
+        ax[1].set_title('P–V curve')
         ax[1].grid(True)
         ax[1].legend()
 
@@ -1108,14 +1109,14 @@ class VentanaPrincipal(QMainWindow):
      
         nombre_tab = self.tabs.tabText(index)
      
-        if nombre_tab == "Sombreado":
+        if nombre_tab == "Shading":
          
             if not self.modelo_guardado:
              
                 QMessageBox.warning(
                     self,
-                    "Modelo no guardado",
-                    "Debes guardar cambios antes de ir a Sombreado."
+                    "Model is not saved",
+                    "You must save your changes before going to Shading."
                 )
      
                 self.tabs.blockSignals(True)
