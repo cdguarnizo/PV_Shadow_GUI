@@ -1,85 +1,85 @@
-# Simulador de Sombreado en Módulos Fotovoltaicos
+# Partial Shading Simulator for Photovoltaic Modules 
 
-Aplicación de escritorio (GUI) desarrollada en Python que modela el comportamiento eléctrico de un módulo fotovoltaico bajo condiciones de **sombreado parcial**, usando el **modelo de dos diodos con ruptura inversa (modelo de Bishop)**.
+Graphical User Interface (GUI) developed in Python that models the electrical behavior of a photovoltaic module under **partial shading** conditions, using the **two-diode reverse-breakdown model (Bishop model)**.
 
-Permite estimar los parámetros circuitales de un panel a partir de su hoja de datos, configurar un patrón de irradiancia celda por celda, y visualizar en tiempo real las curvas resultantes **I–V** y **P–V**.
+It allows you to estimate the circuit parameters of a panel based on its data sheet, configure an irradiance pattern cell by cell, and view the resulting **I–V** and **P–V** curves in real time.
 
-## Características
+## Features
 
-- Ingreso manual de parámetros del panel o selección desde un catálogo predefinido (MSX60, SM55, ST40, KGC200GT, STP280, SPR-315, I-110/24).
-- Estimación automática de los parámetros del circuito equivalente de dos diodos (Iph, Io1, Io2, Rs, Rp) mediante Newton-Raphson.
-- Edición manual de los parámetros estimados y de los parámetros de ruptura inversa (aRBD, VRBD, nRBD).
-- Cuadrícula interactiva de celdas: la irradiancia de cada celda se ajusta con la rueda del mouse.
-- Control de temperatura del panel mediante un deslizador.
-- Simulación eléctrica del módulo con [`pvmismatch`](https://github.com/SunPower/PVMismatch), incluyendo el efecto de diodos de bypass.
-- Visualización en vivo de las curvas I–V y P–V, con marcado del punto de máxima potencia (MPP).
-- Exportación de resultados a Excel (`.xlsx`) y de las gráficas a PNG.
+- Manual entry of panel parameters or selection from a predefined catalog (MSX60, SM55, ST40, KGC200GT, STP280, SPR-315, I-110/24).
+- Automatic estimation of the parameters of the two-diode equivalent circuit (Iph, Io1, Io2, Rs, Rp) using the Newton-Raphson method.
+- Manual editing of the estimated parameters and reverse breakdown parameters (aRBD, VRBD, nRBD).
+- Interactive cell grid: the irradiance of each cell is adjusted using the mouse wheel.
+- Panel temperature control via a slider.
+- Electrical simulation of the module using [`pvmismatch`](https://github.com/SunPower/PVMismatch), including the effect of bypass diodes.
+- Live display of the I–V and P–V curves, with the maximum power point (MPP) marked.
+- Export results to Excel (`.xlsx`) and graphs to PNG.
 
-## Estructura del proyecto
+## Project Structure
 
 ```
 gui_sompreado_pv/
-├── main.py             # Ventana principal y lógica de la interfaz (PySide6)
-├── menu_actions.py      # Acciones del menú: exportar a Excel/PNG, ventana "Acerca de"
-├── estimacion_pv.py     # Estimación de parámetros del modelo de dos diodos
-├── assets/               # Imágenes usadas en la interfaz (modelo circuital, modelo de Bishop)
-├── SimuladorPV.spec     # Configuración de PyInstaller para generar el ejecutable
-└── requirements.txt      # Dependencias de Python con versiones fijas
+├── main.py             # Main Window and Interface Logic (PySide6)
+├── menu_actions.py      # Menu options: Export to Excel/PNG, “About” window
+├── estimacion_pv.py     # Estimation of Parameters for the Two-Diode Model
+├── assets/               # Images used in the interface (circuit model, Bishop model)
+├── SimuladorPV.spec     # Configuring PyInstaller to Generate the Executable
+└── requirements.txt      # Python dependencies with fixed versions
 ```
 
-## Requisitos
+## Requirements
 
-- **Python 3.11** (probado con 3.11.9). No se garantiza compatibilidad con versiones anteriores a 3.10, ya que `numpy` y `scipy` en las versiones usadas aquí lo requieren.
-- **Sistema operativo:** desarrollado y probado en Windows 11. Debería funcionar en Linux/macOS al ser Python + Qt puro, pero no ha sido verificado en esos entornos.
-- Conexión gráfica (entorno de escritorio) para mostrar la interfaz Qt.
+- **Python 3.11** (tested with version 3.11.9). Backward compatibility with versions prior to 3.10 is not guaranteed, since `numpy` and `scipy` in the versions used here require it.
+- **Operating Systems:** Developed and tested on Windows 11. It should work on Linux and macOS since it is written entirely in Python and Qt, but it has not been verified in those environments.
+- Graphical connection (desktop environment) to display the Qt interface.
 
-### Librerías utilizadas
+### Libraries
 
-| Librería | Versión usada | Uso en el proyecto |
+| Library | Versión | Description |
 |---|---|---|
-| [PySide6](https://pypi.org/project/PySide6/) | 6.10.1 | Interfaz gráfica (ventanas, pestañas, widgets, menús) |
-| [numpy](https://pypi.org/project/numpy/) | 2.4.2 | Cálculo numérico y manejo de la matriz de irradiancia |
-| [scipy](https://pypi.org/project/scipy/) | 1.17.0 | Dependencia numérica requerida por `pvmismatch` |
-| [matplotlib](https://pypi.org/project/matplotlib/) | 3.10.8 | Gráficas de las curvas I–V y P–V embebidas en la interfaz |
-| [openpyxl](https://pypi.org/project/openpyxl/) | 3.1.5 | Generación de archivos Excel (`.xlsx`) con los resultados |
-| [pvmismatch](https://pypi.org/project/pvmismatch/) | 4.1 | Motor de simulación eléctrica del módulo fotovoltaico (mismatch por sombreado) |
+| [PySide6](https://pypi.org/project/PySide6/) | 6.10.1 | Graphical interface (windows, tabs, widgets, menus) |
+| [numpy](https://pypi.org/project/numpy/) | 2.4.2 | Numerical Calculation and Handling of the Irradiance Matrix |
+| [scipy](https://pypi.org/project/scipy/) | 1.17.0 | Numerical dependency required by `pvmismatch` |
+| [matplotlib](https://pypi.org/project/matplotlib/) | 3.10.8 | I–V and P–V curve graphs embedded in the interface |
+| [openpyxl](https://pypi.org/project/openpyxl/) | 3.1.5 | Generating Excel files (`.xlsx`) with the results |
+| [pvmismatch](https://pypi.org/project/pvmismatch/) | 4.1 | Electrical Simulation Engine for Photovoltaic Modules (Shading Mismatch) |
 
-Todas las versiones exactas quedan fijadas en [`requirements.txt`](requirements.txt).
+All exact versions are listed at [`requirements.txt`](requirements.txt).
 
-## Instalación
+## Installation
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
 
    ```bash
    git clone https://github.com/Maritru732/gui_sombreado_pv.git
    cd gui_sombreado_pv
    ```
 
-2. **Crear y activar un entorno virtual** (recomendado)
+2. **Build and activate the virtual environment** (recommended)
 
-   En Windows (PowerShell):
+   In Windows (PowerShell):
 
    ```powershell
    python -m venv venv
    .\venv\Scripts\Activate.ps1
    ```
 
-   En Linux/macOS:
+   In Linux/macOS:
 
    ```bash
    python3 -m venv venv
    source venv/bin/activate
    ```
 
-3. **Instalar las dependencias**
+3. **Install dependencies**
 
    ```bash
    pip install -r requirements.txt
    ```
 
-## Ejecución
+## Excecute
 
-Con el entorno virtual activado:
+With the Virtual environment activated:
 
 ```bash
 python main.py
